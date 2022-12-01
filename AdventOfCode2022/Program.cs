@@ -21,7 +21,7 @@ foreach (string line in Lines)
 Console.WriteLine(max);
 
 //Part 2
-int[] top3 = { 0, 0, 0 };
+IEnumerable<int> sums = new List<int>();
 runningSum = 0;
 foreach (string line in Lines)
 {
@@ -31,13 +31,9 @@ foreach (string line in Lines)
     }
     else
     {
-        if (runningSum > top3.Last())
-        {
-            top3[2]= runningSum;
-        }
+        sums = sums.Append(runningSum);
         runningSum = 0;
-        Array.Sort(top3);
-        Array.Reverse(top3);
     }
 }
-Console.WriteLine(top3.Sum());
+sums = sums.OrderByDescending(i => i);
+Console.WriteLine(Enumerable.Range(0,3).Select(x => sums.ElementAt(x)).Sum());

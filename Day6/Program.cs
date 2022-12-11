@@ -7,7 +7,7 @@ int findStart(int requiredUniques, string line)
         HashSet<char> chars = new HashSet<char>();
         for (int j = 0; j < requiredUniques; j++)
         {
-            chars.Add(line[i - j]);
+            if (chars.Add(line[i - j]) == false) continue;
         }
         if (chars.Count() == requiredUniques)
         {
